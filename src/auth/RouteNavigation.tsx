@@ -5,8 +5,8 @@ import Login from "../components/Login";
 import { ToastContainer } from "react-toastify";
 import Register from "../components/Register";
 import AddContact from "../components/personal/AddContact";
-import AddAddress from "../components/personal/AddAddress";
-import ListAddress from "../components/personal/ListAddress";
+import AddAddress from "../components/personal/address/AddAddress";
+import ListAddress from "../components/personal/address/ListAddress";
 import Logout from "../components/Logout";
 
 const RouteNavigation = () => {

@@ -32,7 +32,6 @@ const refreshAuthLogic = async (failedRequest: FailedRequest) => {
       headers: headersList,
     };
     const response = await axios.request(reqOptions);
-    console.log(response.data.data.token);
     secureLocalStorage.setItem("acessToken", response.data.data.token);
     secureLocalStorage.setItem("refreshToken", response.data.data.refreshToken);
     secureLocalStorage.setItem("user", {

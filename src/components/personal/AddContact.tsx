@@ -2,7 +2,7 @@ import { useState } from "react";
 import Sidebar from "../Sidebar";
 import { axiosInstance } from "../../auth/AxiosConfig";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 
 const AddContact = () => {
@@ -60,6 +60,11 @@ const AddContact = () => {
               >
                 Save
               </button>
+              <Link to="/">
+                <button className="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">
+                  Back
+                </button>
+              </Link>
             </div>
           </form>
         </div>

@@ -1,7 +1,7 @@
-import { useNavigate, useParams } from "react-router-dom";
-import Sidebar from "../Sidebar";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Sidebar from "../../Sidebar";
 import { useEffect, useState } from "react";
-import { axiosInstance } from "../../auth/AxiosConfig";
+import { axiosInstance } from "../../../auth/AxiosConfig";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 
@@ -33,9 +33,7 @@ const AddAddress = () => {
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const handleBack = () => {
-    redirect("/");
-  };
+
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
@@ -56,7 +54,7 @@ const AddAddress = () => {
         setCity("");
         setProvince("");
         setCountry("");
-        handleBack();
+        redirect("/");
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -72,7 +70,8 @@ const AddAddress = () => {
       <Sidebar />
       <div className="p-4 ml-[300px]">
         <div className="p-8 rounded border border-gray-200">
-          <h1 className="font-medium text-3xl">{personal.name}</h1>
+          <h1 className="font-medium text-3xl">Add Address</h1>
+          <p className="text-gray-600 mt-6">{personal.name}</p>
           <form onSubmit={handleSubmit}>
             <div className="mt-8 space-y-6">
               <div className="flex items-center">
@@ -163,13 +162,12 @@ const AddAddress = () => {
               >
                 Save
               </button>
-              <button
-                type="button"
-                onClick={handleBack}
-                className="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50"
-              >
-                Cancel
-              </button>
+
+              <Link to="/">
+                <button className="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">
+                  Back
+                </button>
+              </Link>
             </div>
           </form>
         </div>

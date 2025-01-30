@@ -1,11 +1,11 @@
-import Dashboard from "./Dashboard";
+import ListContact from "./personal/ListContact";
 import Sidebar from "./Sidebar";
 
 const Home = () => {
   return (
     <>
       <Sidebar />
-      <Dashboard />
+      <ListContact />
     </>
   );
 };

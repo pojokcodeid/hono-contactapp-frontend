@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { axiosInstance } from "../auth/AxiosConfig";
-import ButtonNav from "./personal/ButtonNav";
+import { axiosInstance } from "../../auth/AxiosConfig";
+import ButtonNav from "./ButtonNav";
 
-const Dashboard = () => {
+const ListContact = () => {
   const [personals, setPersonals] = useState([]);
   const loadData = async () => {
     const response = await axiosInstance.get("/api/personal");
@@ -48,4 +48,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default ListContact;
