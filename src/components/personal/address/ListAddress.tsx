@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const ListAddress = () => {
   const { id } = useParams();
   const [personal, setPersonal] = useState({ id: 0, name: "" });
+  const [address, setAddress] = useState([]);
   const loadData = async () => {
     try {
       const response = await axiosInstance.get(`/api/personal/${id}`);
@@ -25,6 +26,25 @@ const ListAddress = () => {
   };
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const loadDataAddress = async () => {
+    try {
+      const response = await axiosInstance.get(`/api/address/personal/${id}`);
+      if (response.data) {
+        setAddress(response.data.data);
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errMessage = JSON.parse(error.request.response);
+        toast.error(errMessage.message, {
+          position: "top-center",
+        });
+      }
+    }
+  };
+  useEffect(() => {
+    loadDataAddress();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -59,72 +79,30 @@ const ListAddress = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      Home
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      jl jurago no 70 Depok, Jawa Barat Indonesia
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a
-                        href="#"
-                        className="text-indigo-600 hover:text-indigo-900"
-                      >
-                        Edit
-                      </a>
-                      <a
-                        href="#"
-                        className="ml-4 text-red-600 hover:text-red-900"
-                      >
-                        Delete
-                      </a>
-                    </td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      John Smith
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      Product Manager
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a
-                        href="#"
-                        className="text-indigo-600 hover:text-indigo-900"
-                      >
-                        Edit
-                      </a>
-                      <a
-                        href="#"
-                        className="ml-4 text-red-600 hover:text-red-900"
-                      >
-                        Delete
-                      </a>
-                    </td>
-                  </tr>
-                  <tr className="bg-white">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      Alice Johnson
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      UX Designer
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a
-                        href="#"
-                        className="text-indigo-600 hover:text-indigo-900"
-                      >
-                        Edit
-                      </a>
-                      <a
-                        href="#"
-                        className="ml-4 text-red-600 hover:text-red-900"
-                      >
-                        Delete
-                      </a>
-                    </td>
-                  </tr>
+                  {address.map((address: { id: number; address: string }) => (
+                    <tr key={address.id} className="bg-white">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        Home
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        jl jurago no 70 Depok, Jawa Barat Indonesia
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <a
+                          href="#"
+                          className="text-indigo-600 hover:text-indigo-900"
+                        >
+                          Edit
+                        </a>
+                        <a
+                          href="#"
+                          className="ml-4 text-red-600 hover:text-red-900"
+                        >
+                          Delete
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

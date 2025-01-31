@@ -11,7 +11,7 @@ const ButtonNav = ({ id }: { id: number }) => {
       <div>
         <button
           type="button"
-          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white text-sm font-medium text-gray-700 focus:outline-none"
+          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white text-sm font-medium text-gray-700 focus:outline-none cursor-pointer"
           id="menu-button"
           aria-expanded={isOpen}
           aria-haspopup="true"
