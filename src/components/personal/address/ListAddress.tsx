@@ -47,6 +47,30 @@ const ListAddress = () => {
     loadDataAddress();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleDelete = async (idDelete: number) => {
+    try {
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this data?"
+      );
+      if (confirmDelete) {
+        const response = await axiosInstance.delete(`/api/address/${idDelete}`);
+        if (response.data) {
+          toast.success(response.data.message, {
+            position: "top-center",
+          });
+          window.location.reload();
+        }
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errMessage = JSON.parse(error.request.response);
+        toast.error(errMessage.message, {
+          position: "top-center",
+        });
+      }
+    }
+  };
   return (
     <>
       <Sidebar />
@@ -79,30 +103,45 @@ const ListAddress = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {address.map((address: { id: number; address: string }) => (
-                    <tr key={address.id} className="bg-white">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        Home
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        jl jurago no 70 Depok, Jawa Barat Indonesia
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a
-                          href="#"
-                          className="text-indigo-600 hover:text-indigo-900"
-                        >
-                          Edit
-                        </a>
-                        <a
-                          href="#"
-                          className="ml-4 text-red-600 hover:text-red-900"
-                        >
-                          Delete
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
+                  {address.map(
+                    (address: {
+                      id: number;
+                      addressName: string;
+                      address: string;
+                      city: string;
+                      province: string;
+                      country: string;
+                    }) => (
+                      <tr key={address.id} className="bg-white">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {address.addressName}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {address.address +
+                            ", " +
+                            address.city +
+                            address.province +
+                            ", " +
+                            address.country}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <a
+                            href={"/edit-address/" + address.id}
+                            className="text-indigo-600 hover:text-indigo-900"
+                          >
+                            Edit
+                          </a>
+                          <a
+                            href="#"
+                            onClick={() => handleDelete(address.id)}
+                            className="ml-4 text-red-600 hover:text-red-900"
+                          >
+                            Delete
+                          </a>
+                        </td>
+                      </tr>
+                    )
+                  )}
                 </tbody>
               </table>
             </div>

@@ -5,7 +5,7 @@ import { axiosInstance } from "../../../auth/AxiosConfig";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 
-const AddAddress = () => {
+const EditAddress = () => {
   const { id } = useParams();
   const [personal, setPersonal] = useState({ id: 0, name: "" });
   const [addressName, setAddressName] = useState("");
@@ -16,9 +16,14 @@ const AddAddress = () => {
   const redirect = useNavigate();
   const loadData = async () => {
     try {
-      const response = await axiosInstance.get(`/api/personal/${id}`);
+      const response = await axiosInstance.get(`/api/address/${id}`);
       if (response.data) {
-        setPersonal(response.data.data);
+        setPersonal(response.data.data.personal);
+        setAddressName(response.data.data.addressName);
+        setAddress(response.data.data.address);
+        setCity(response.data.data.city);
+        setProvince(response.data.data.province);
+        setCountry(response.data.data.country);
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -37,13 +42,13 @@ const AddAddress = () => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post("/api/address", {
+      const response = await axiosInstance.put(`/api/address/${id}`, {
         addressName,
         address,
         city,
         province,
         country,
-        personalId: Number(id),
+        personalId: Number(personal.id),
       });
       if (response.data) {
         toast.success(response.data.message, {
@@ -54,7 +59,7 @@ const AddAddress = () => {
         setCity("");
         setProvince("");
         setCountry("");
-        redirect("/list-address/" + id);
+        redirect("/list-address/" + personal.id);
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -70,7 +75,7 @@ const AddAddress = () => {
       <Sidebar />
       <div className="p-4 ml-[300px]">
         <div className="p-8 rounded border border-gray-200">
-          <h1 className="font-medium text-3xl">Add Address</h1>
+          <h1 className="font-medium text-3xl">Edit Address</h1>
           <p className="text-gray-600 mt-6">{personal.name}</p>
           <form onSubmit={handleSubmit}>
             <div className="mt-8 space-y-6">
@@ -176,4 +181,4 @@ const AddAddress = () => {
   );
 };
 
-export default AddAddress;
+export default EditAddress;

@@ -51,12 +51,17 @@ const EditContact = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await axiosInstance.delete(`/api/personal/${id}`);
-      if (response.data) {
-        toast.success(response.data.message, {
-          position: "top-center",
-        });
-        navigate("/");
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this data?"
+      );
+      if (confirmDelete) {
+        const response = await axiosInstance.delete(`/api/personal/${id}`);
+        if (response.data) {
+          toast.success(response.data.message, {
+            position: "top-center",
+          });
+          navigate("/");
+        }
       }
     } catch (error) {
       if (error instanceof AxiosError) {

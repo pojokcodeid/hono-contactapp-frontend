@@ -9,6 +9,7 @@ import AddAddress from "../components/personal/address/AddAddress";
 import ListAddress from "../components/personal/address/ListAddress";
 import Logout from "../components/Logout";
 import EditContact from "../components/personal/EditContact";
+import EditAddress from "../components/personal/address/EditAddress";
 
 const RouteNavigation = () => {
   const refreshToken = secureLocalStorage.getItem("refreshToken");
@@ -22,6 +23,7 @@ const RouteNavigation = () => {
               <Route path="/add-contact" element={<AddContact />} />
               <Route path="/edit-contact/:id" element={<EditContact />} />
               <Route path="/add-address/:id" element={<AddAddress />} />
+              <Route path="/edit-address/:id" element={<EditAddress />} />
               <Route path="/list-address/:id" element={<ListAddress />} />
               <Route path="/logout" element={<Logout />} />
             </Routes>
