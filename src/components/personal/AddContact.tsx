@@ -31,7 +31,7 @@ const AddContact = () => {
     <>
       <Sidebar />
       <div className="p-4 ml-[300px]">
-        <div className="p-8 rounded border border-gray-200">
+        <div className="p-8 rounded-lg border border-gray-200">
           <h1 className="font-medium text-3xl">Add Contact</h1>
           <form onSubmit={handleSubmit}>
             <div className="mt-8 space-y-6">

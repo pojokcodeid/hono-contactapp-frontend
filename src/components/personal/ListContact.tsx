@@ -28,7 +28,7 @@ const ListContact = () => {
         personals.map((personal: { id: number; name: string }) => (
           <div
             key={personal.id}
-            className="w-full bg-white shadow rounded border border-transparent hover:border-blue-500"
+            className="w-full bg-white rounded-lg border border-gray-200 hover:border-blue-500"
           >
             <Link to={`/edit-contact/${personal.id}`} key={personal.id}>
               <div className="h-48 w-full checker-bg flex items-center justify-center p-4 text-blue-500 cursor-pointer">

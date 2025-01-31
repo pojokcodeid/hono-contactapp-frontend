@@ -9,7 +9,7 @@ const Sidebar = () => {
   return (
     <div
       className="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] 
-    overflow-y-auto text-center border-r border-transparent shadow"
+    overflow-y-auto text-center border-r border-gray-200"
     >
       <div className="text-gray-100 text-xl">
         <Link to="/">
@@ -27,28 +27,26 @@ const Sidebar = () => {
           </div>
         </Link>
         <div className="my-2 bg-gray-200 h-[1px]"></div>
-        <div
-          className="p-2.5 mt-3 flex items-center 
+        <Link to="/add-contact">
+          <div
+            className="p-2.5 mt-3 flex items-center 
         rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-400 text-gray-200"
-        >
-          <a
-            href="/add-contact"
-            className="text-[15px] ml-4 text-gray-600 font-bold"
           >
-            Add Contact
-          </a>
-        </div>
-        <div
-          className="p-2.5 mt-3 flex items-center 
+            <div className="text-[15px] ml-4 text-gray-600 font-bold">
+              Add Contact
+            </div>
+          </div>
+        </Link>
+        <Link to="/logout">
+          <div
+            className="p-2.5 mt-3 flex items-center 
         rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-400 text-gray-200"
-        >
-          <a
-            href="/logout"
-            className="text-[15px] ml-4 text-gray-600 font-bold"
           >
-            Logout
-          </a>
-        </div>
+            <div className="text-[15px] ml-4 text-gray-600 font-bold">
+              Logout
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );

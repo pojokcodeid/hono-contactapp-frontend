@@ -69,7 +69,7 @@ const AddAddress = () => {
     <>
       <Sidebar />
       <div className="p-4 ml-[300px]">
-        <div className="p-8 rounded border border-gray-200">
+        <div className="p-8 rounded-lg border border-gray-200">
           <h1 className="font-medium text-3xl">Add Address</h1>
           <p className="text-gray-600 mt-6">{personal.name}</p>
           <form onSubmit={handleSubmit}>
